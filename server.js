@@ -3,7 +3,8 @@ const path = require('path')
 const apiRoutes = require('./app/api/route')
 
 const app = express()
-const PORT = 3300
+// Menggunakan port dinamis dari Heroku jika ada, atau default ke 3300 jika di localhost
+const PORT = process.env.PORT || 3300
 
 app.use(require('cors')())
 app.use(express.json())
@@ -21,5 +22,5 @@ app.use(express.static(path.join(__dirname, 'public'), {
 app.use('/api', apiRoutes)
 
 app.listen(PORT, () => {
-  console.log(`server jalan di http://localhost:${PORT}`)
+  console.log(`server jalan di port ${PORT}`)
 })
